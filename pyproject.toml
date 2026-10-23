@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paper-obsidian-local"
+version = "0.1.0"
+description = "Local evidence-gated AI/ML paper library for Obsidian"
+requires-python = ">=3.11"
+dependencies = ["httpx==0.28.1", "pypdf==6.11.0", "PyYAML==6.0.3", "python-dotenv==1.2.2", "PyMuPDF==1.26.7"]
+
+[project.scripts]
+paper = "paper_obsidian.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["paper_obsidian*"]

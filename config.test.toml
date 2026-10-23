@@ -1,0 +1,73 @@
+[paths]
+vault = 'data/真实来源测试 Vault'
+# 如果改用综合 Vault，请设置如 AI论文库 的专用子目录。
+subfolder = ""
+data = "data/live-test"
+whitelist = "whitelists/venues.json"
+
+[search]
+keywords = ["machine learning", "multimodal learning", "artificial intelligence"]
+exclude = ["bioinformatics", "genomics", "protein", "drug discovery"]
+arxiv_categories = ["cs.AI", "cs.LG", "cs.CV", "cs.CL", "stat.ML"]
+start_date = "2026-09-19"
+end_date = "" # 空值表示上海当天
+lookback_days = 14
+# 每次仍回查整个初始窗口，防止超出短回溯期的延迟收录；高流量时见 README 的截断提示。
+full_backfill_every_days = 7
+per_source = 25
+max_pages = 2
+sources = ["openalex", "arxiv", "openreview"]
+
+[limits]
+candidates_per_day = 50
+brief_per_day = 1
+fulltext_per_day = 1
+bilingual_per_day = 0
+model_calls_per_day = 1
+input_chars_per_call = 60000
+max_output_tokens = 6000
+pdf_max_mb = 30
+pdf_max_pages = 100
+
+[model]
+enabled = true
+summarize_candidates = false
+# 当前使用 DeepSeek 官方接口；关闭默认思考模式，避免输出预算耗于思考而正文为空。
+thinking = "disabled"
+# 只有填写实际服务商价格才估算；-1 表示未知。币种自定，例如 CNY。
+input_price_per_million = -1.0
+output_price_per_million = -1.0
+currency = "未配置"
+
+[parser]
+compact_layout_whitespace = true
+
+[translation]
+enabled = false
+executable = ".venv-translation/bin/pdf2zh_next"
+timeout_seconds = 1800
+# 工具内部会有多次 API 请求，不能以一次翻译当成一次模型调用。
+# 此开关保持 false；只有自行确认翻译服务预算后才改 true。
+budget_confirmed = false
+
+[network]
+timeout_seconds = 30
+retries = 2
+cache_hours = 6
+user_agent = "paper-obsidian-local/0.1 (personal research; no paywall bypass)"
+
+[schedule]
+timezone = "Asia/Shanghai"
+time = "20:00"
+
+# 单篇中文总结验收：不重新检索、不下载、不写每日推荐。
+[scope]
+paper_ids = ["80c6ca8c01157eb19816"]
+allow_fetch = false
+allow_download = false
+write_brief = false
+
+[acceptance]
+paper_id = "80c6ca8c01157eb19816"
+target_config = "config.toml"
+max_calls_per_run = 1

@@ -1,2 +1,52 @@
-# paper-obsidian-local
-Evidence-gated local paper discovery, review and bilingual Obsidian library workflow.
+# Paper Obsidian Local
+
+本地论文发现、证据核验、中文阅读笔记与中英对照 PDF 工作流，面向 Obsidian。源码包含来源检索、稳定 ID 去重、资格筛选、全文解析、AI 原文审校、请求账本、断点恢复、容量归档与 JCR 学科审核。
+
+此仓库是经过脱敏的源码交付副本。原有生产环境继续独立运行；这里不包含论文原件、数据库、笔记库、API 响应、浏览器会话、个人交接材料或受限期刊证据。此副本的设置不能用于覆盖既有生产配置。
+
+## 安装与配置
+
+Python 3.11+；Windows 的现有启动脚本使用 WSL Ubuntu。翻译功能需要另行配置独立环境。
+
+```powershell
+.\install.ps1
+```
+
+Linux / WSL：
+
+```bash
+bash scripts/install.sh
+```
+
+1. 按 `.env.example` 在本地 `.env` 填写自己的服务地址、模型和密钥。
+2. 修改 `config.toml` 中的 Vault 路径、来源与筛选设置。当前使用仓库内的 `data/example-vault`，避免访问个人笔记库。
+3. 示例默认关闭模型、翻译、每日处理、知网浏览器、交叉分支与自动 JCR；明确自己的预算后再按需开启。`config.example.toml` 保存相同的初始模板。
+4. 期刊名单为空；官方材料与论文级审核需由使用者重新导入和核验。会议配置保留原项目的目录记录，使用前仍需核对适用年份和逐篇题录证据。
+
+修改本地配置后，不要直接提交个人路径；请使用 `git diff --cached` 核对每次上传内容。
+
+## 使用
+
+```powershell
+.\run.ps1 doctor
+.\run.ps1 status
+.\run.ps1 check-links
+```
+
+配置并授权付费功能后，可运行 `.\run.ps1 daily`。`daily --no-fetch` 仍可能调用模型或翻译；`daily --offline-replay` 禁止网络、模型和翻译，但会重放本地机器管理区。新副本不含既有缓存。
+
+日常入口、费用核算、容量管理、知网与期刊材料导入见 [docs](docs/)。保留的专题说明含历史验收背景，不代表此新副本已经完成登录、材料导入或真实付费验收。定时任务需要使用者主动安装；勿在已有生产任务的同一账户下重复安装同名任务。
+
+## 测试
+
+```bash
+.venv/bin/python -m unittest discover -s tests -q
+```
+
+测试使用临时目录、模拟服务和临时数据库。离线测试通过不代表真实模型质量、定时运行收尾或 Obsidian 界面已经验证。
+
+## 安全与限制
+
+见 [SECURITY.md](SECURITY.md)。长论文、扫描件和复杂图表可能进入待处理；AI 原文审校不能替代人工核读，未满足资格和全文证据的候选不应强行发布。
+
+此仓库未添加开源许可证；上传源码不自动授予第三方开源使用权。
