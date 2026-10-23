@@ -1,0 +1,9 @@
+{
+  "name": "paper-cnki-browser",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@playwright/mcp": "0.0.83",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}
