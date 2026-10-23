@@ -1,0 +1,27 @@
+{
+  "prices": [
+    {
+      "version": "deepseek-20261023-v1",
+      "source_id": "example-provider-configure-locally",
+      "model": "deepseek-flash",
+      "currency": "CNY",
+      "cache_hit": "0.04",
+      "cache_miss": "2",
+      "output": "8",
+      "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "checked_at": "2026-10-23T18:04:49+08:00",
+      "valid_from": "2026-10-23T18:04:49+08:00",
+      "valid_until": "2026-10-30T00:00:00+08:00",
+      "tariff": "beijing-offpeak-v1",
+      "evidence_sha256": "8e1ceaf71bcb1e98a936facbfe28c2e82436296aae6c3efa2b0aa7b9105ed9d4",
+      "calendar": {
+        "valid_from": "2026-10-23",
+        "valid_until": "2026-10-30",
+        "holidays": [],
+        "source": "https://www.beijing.gov.cn/cs/gncs/zcwj/202603/t20260327_4568275.html",
+        "checked_at": "2026-10-23",
+        "note": "国务院2026年放假通知；此区间无节假日，周末按供应商规则仍为空闲。"
+      }
+    }
+  ]
+}
