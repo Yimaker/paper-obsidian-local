@@ -1,0 +1,143 @@
+# TEST FIXTURE ONLY. Do not use for production.
+[paths]
+vault = 'data/test-vault'
+# 如果改用综合 Vault，请设置如 AI论文库 的专用子目录。
+subfolder = ""
+data = "data/production"
+whitelist = "whitelists/venues.json"
+
+[search]
+keywords = ["machine learning", "multimodal learning", "artificial intelligence", "multimodal", "large language model", "representation learning"]
+exclude = ["bioinformatics", "genomics", "protein", "drug discovery", "alzheimer", "disease diagnosis"]
+arxiv_categories = ["cs.AI", "cs.LG", "cs.CV", "cs.CL", "stat.ML"]
+start_date = "2025-10-20"
+end_date = "" # 空值表示上海当天
+lookback_days = 14
+# 每次仍回查整个初始窗口，防止超出短回溯期的延迟收录；高流量时见 README 的截断提示。
+full_backfill_every_days = 7
+per_source = 12
+max_pages = 2
+sources = ["official", "openalex", "arxiv", "openreview"]
+
+[limits]
+candidates_per_day = 50
+# Legacy manual entry compatibility; the daily runner uses the token-aware
+# [daily] planner and finite per-request/per-revision retries, not these quotas.
+brief_per_day = 3
+fulltext_per_day = 3
+bilingual_per_day = 3
+model_calls_per_day = 2147483647
+input_chars_per_call = 900000
+max_output_tokens = 16000
+pdf_max_mb = 30
+pdf_max_pages = 100
+
+[capacity]
+candidate_max = 200
+formal_max = 100
+cross_max = 50
+rule_version = "retention-v1"
+# 固定 > 主题匹配 > 有理由的用户阅读价值 > 正式资格 > 发表证据 > 资料准备 > 可用日期 > 原区保留 > ID
+# YAML: capacity_pin: true；capacity_reading_value: high + capacity_reading_reason: 具体理由
+# 日期缺失时本轮不使用日期比较；资料缺失表示未知，不代表论文质量差。
+
+[model]
+enabled = true
+summarize_candidates = false
+thinking = "disabled"
+# 只有填写实际服务商价格才估算；-1 表示未知。币种自定，例如 CNY。
+input_price_per_million = -1.0
+output_price_per_million = -1.0
+currency = "未配置"
+
+[parser]
+compact_layout_whitespace = true
+
+[translation]
+enabled = true
+executable = ".venv-translation/bin/pdf2zh_next"
+timeout_seconds = 7200
+# 工具内部会有多次 API 请求，不能以一次翻译当成一次模型调用。
+# Fixture only; tests inject mock transports and temporary paths.
+budget_confirmed = true
+
+[network]
+timeout_seconds = 30
+retries = 2
+cache_hours = 6
+user_agent = "paper-obsidian-local/0.1 (personal research; no paywall bypass)"
+
+[schedule]
+timezone = "Asia/Shanghai"
+time = "12:01"
+
+[journals]
+# Same production SQLite state + http-cache; no model/cookie access.
+cache_days = 30
+failure_cache_hours = 24
+timeout_seconds = 15
+mjl_enabled = true
+max_official_per_day = 3
+mjl_timeout_seconds = 45
+# Existing authenticated Windows Firecrawl CLI, callable from the scheduled WSL.
+# Public MJL exact-ISSN page only; basic proxy, no login/challenge bypass.
+mjl_command = ["firecrawl"]
+# LetPub: no documented public API/automatic metric collection permission found.
+# Import only; robots Allow alone is not treated as an API grant.
+letpub_automatic = false
+
+[daily]
+enabled = true
+complete_per_day = 3
+# Verified 2026-10-20 against official DeepSeek model documentation.
+# This is the provider context capacity, not a cumulative spending quota.
+context_tokens = 1000000
+output_tokens = 16000
+safety_tokens = 32768
+max_request_attempts = 2
+request_timeout_seconds = 600
+max_revisions = 2
+model_limits_source = "https://api-docs.deepseek.com/quick_start/pricing"
+model_limits_checked = "2026-10-20"
+
+[cnki_browser]
+enabled = true
+# No daily paid browser authorization; existing daily only reports saved state.
+daily_enabled = false
+node = 'C:\Program Files\nodejs\node.exe'
+max_steps = 16
+max_calls = 12
+max_input_bytes = 24000
+max_output_tokens = 384
+acceptance_cap_cny = '1'
+
+[cnki_browser.price]
+model = 'deepseek-flash'
+response_model = 'deepseek-flash'
+currency = 'CNY'
+# Official peak rates are reserved/recorded as upper bounds, never underestimate.
+cache_hit = '0.04'
+cache_miss = '2'
+output = '8'
+source = 'https://api-docs.deepseek.com/zh-cn/quick_start/pricing'
+checked_at = '2026-10-23'
+valid_from = '2026-10-23T00:00:00+08:00'
+valid_until = '2026-10-24T00:00:00+08:00'
+evidence_sha256 = 'db185a07cac1e1fe2c155d374122aa86fa25c76c0652fa42aa902243b0db4fe2'
+
+[api_accounting]
+price_file = "docs/pricing/deepseek-20261023.json"
+
+[cross]
+enabled = true
+new_since = ""
+complete_per_day = 1
+keywords = ["machine learning medical", "deep learning protein", "neural materials", "machine learning manufacturing", "deep learning agriculture", "machine learning education", "autonomous driving"]
+exclude = []
+
+[jcr_auto]
+enabled = true
+papers_per_day = 3
+# One blind full-input judgment plus one final source audit; no revisions.
+max_input_bytes = 900000
+max_requests_per_stage = 1
