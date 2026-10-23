@@ -6,8 +6,14 @@ build-backend = "setuptools.build_meta"
 name = "paper-obsidian-local"
 version = "0.1.0"
 description = "Local evidence-gated AI/ML paper library for Obsidian"
+readme = "README.md"
+license = "MIT"
 requires-python = ">=3.11"
 dependencies = ["httpx==0.28.1", "pypdf==6.11.0", "PyYAML==6.0.3", "python-dotenv==1.2.2", "PyMuPDF==1.26.7"]
+
+[project.urls]
+Repository = "https://github.com/Yimaker/paper-obsidian-local"
+Issues = "https://github.com/Yimaker/paper-obsidian-local/issues"
 
 [project.scripts]
 paper = "paper_obsidian.cli:main"
