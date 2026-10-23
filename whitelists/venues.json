@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "test_only": false,
+  "note": "Distribution template. Local journal evidence and reviews are excluded; import your own verified evidence before use.",
+  "journals": [],
+  "conferences": [
+    {
+      "acronym": "AAAI",
+      "grade": "A",
+      "ccf_year": 2026,
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "evidence": "第七版正式 PDF 人工智能会议 A 类"
+    },
+    {
+      "acronym": "NeurIPS",
+      "grade": "A",
+      "ccf_year": 2026,
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "evidence": "第七版正式 PDF 人工智能会议 A 类"
+    },
+    {
+      "acronym": "ACL",
+      "grade": "A",
+      "ccf_year": 2026,
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "evidence": "第七版正式 PDF 人工智能会议 A 类"
+    },
+    {
+      "acronym": "CVPR",
+      "grade": "A",
+      "ccf_year": 2026,
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "evidence": "第七版正式 PDF 人工智能会议 A 类"
+    },
+    {
+      "acronym": "ICCV",
+      "grade": "A",
+      "ccf_year": 2026,
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "evidence": "第七版正式 PDF 人工智能会议 A 类"
+    },
+    {
+      "acronym": "ICML",
+      "grade": "A",
+      "ccf_year": 2026,
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "evidence": "第七版正式 PDF 人工智能会议 A 类"
+    },
+    {
+      "acronym": "ICLR",
+      "grade": "A",
+      "ccf_year": 2026,
+      "source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "evidence": "第七版正式 PDF 人工智能会议 A 类；分栏目网页仍有旧内容，以正式 PDF 为准"
+    }
+  ],
+  "openreview_profiles": [
+    {
+      "acronym": "ICLR",
+      "venue_id": "ICLR.cc/2026/Conference",
+      "main_track": true,
+      "paper_type": "regular",
+      "year": 2026,
+      "source": "https://iclr.cc/Conferences/2026/CallForPapers",
+      "checked_at": "2026-10-19T13:28:43+08:00",
+      "note": "必须精确匹配录用 venueid；Submission、Workshop、Withdrawn 等不接受"
+    }
+  ]
+}
